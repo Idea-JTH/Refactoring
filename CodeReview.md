@@ -264,12 +264,13 @@
                       
                       @Override
                       public void setting() {
-                          ~~~
+                  ~~~
                       }
                   }
                   ~~~
 
                   * 이렇게 상속받아진 자식클래스에서 부모의 메소드를 가져다 쓸수있다. 이 코드에선 print() 메소드에서 setting() 메소드까지 실행시킨다. 이러면 checkEffect에서 일일이 따져가며 출력할 필요가 없어지게 된다.
+                  ~~~
 
 * checkEffect - 리팩토링을 거친 후
 
