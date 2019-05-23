@@ -88,10 +88,12 @@
 ~~~
     
   * 파라미터로 들어온 beforeVo 3개를 세팅하는 메소드이다. 현재는 추상화를 사용하기 전 코드라 before자체의 필드와 그 안에 들어있는 effect와 secenChange 도 동일하게 모두 일일이 set()메소드를 통해 값을 넣어주어야 한다. 벌써 매우 비효율적이란걸 알 수 있다.
+    
+    
   
 
   
-* printBefore()
+  * printBefore()
   
     ~~~java
     private static void printBefore(List<BeforeMovieCutVo> befores, int i, int j) {
@@ -108,7 +110,7 @@
     			
     		} else {
     			System.out.println(j+"초 " + "before" + (i+1) + " (" + befores.get(i).getLocation().x + " " + befores.get(i).getLocation().y + ") 효과 없음");
-    		}
+  		}
     	}
   ~~~
   
@@ -116,7 +118,7 @@
   
   
   
-* checkEffect() (장면전환 효과 체크인 checkSC()도 동일한 형태이다...)
+  * checkEffect() (장면전환 효과 체크인 checkSC()도 동일한 형태이다...)
   
     ~~~java
     private static void checkEffect(BeforeMovieCutVo before, int j, int i, Effect effect) {
@@ -142,9 +144,9 @@
     			effect.wiggleSetting();
     			System.out.println(j + "초 " + "before"+ (i+1) + " (" + before.getLocation().x + " " + before.getLocation().y + ") effect : " + before.geteName() + " " + effect.getLocation() + " 현재 : " + effect.now + "%");
     			break;
-    		}
+  		}
     	}
-  ~~~
+    ~~~
   
     * ename은 여기서 효과명을 말한다. 모든 효과 출력양식이 비슷하지만 ename에 따라서 출력양식이 달라지며 effect에 선언된 효과별 세팅들이 호출된다. 즉, effect클래스는 필드변수도 많지만 효과가 많을 수록 그의 따른 세팅메소드도 많아진다..
 
