@@ -1,4 +1,4 @@
-# 3가지 코드 분석&비교
+3가지 코드 분석&비교
 
 1. 추상화를 사용하지 않았을 때 짰을 코드
 2. 추상화를 사용했을 때의 코드
@@ -177,7 +177,9 @@ private static void printBefore(List<BeforeMovieCutVo> befores, int i, int j) {
   * 달라진 effect클래스이다.
     * 먼저 코드의 양이 눈의띄게 줄어들었다. 원래 코드는 effect가 가질 수 있는 모든 것들을 이 effect클래스 한곳에 몰아넣었었다. 하지만 지금은 효과 모두가 가지는 공통적인 부분들만 선언해 놓은 상태이다. 따라서 클래스가 간소화되었다.
     * 추상화를 더 자세히 설명하자면..
-      * ![error](http://cfile226.uf.daum.net/image/032FD643516BAF5D1FD5F1)
+      
+      ![error](http://cfile226.uf.daum.net/image/032FD643516BAF5D1FD5F1)
+      
       * 이처럼 여러개의 클래스가 모두 공통되는 기능이 있을 경우 한 클래스에서 모두 구현하지 않고 부모 클래스에 메소드를 선언한뒤 자식 클래스들이 이를 상속받아 구현하는것이다.
       *  좀 더 쉽게 이야기하자면 저 사진엔 유닛이라는 부모 클래스와 히드라, 질럿, 마린이라는 자식 클래스가 있다. 유닛을 상속받은 자식 클래스에는 어떤 기능이 공통으로 들어가있을까?? 일단 모두 움직일 수 있으며 상대방에게 공격을 가할 수 있다는 공통점이 들어가있다. 그러면 유닛 클래스에 공격(), 이동() 메소드를 선언한 뒤 자식 클래스에서 상속받아 오버라이드할 수 있는 것이다.
 
@@ -232,68 +234,66 @@ private static void printBefore(List<BeforeMovieCutVo> befores, int i, int j) {
 
 * checkEffect()
 
-  * ~~~java
-    effect.print(j);
-    ~~~
+  ~~~java
+  effect.print(j);
+  ~~~
 
-    * 2번코드까지에선 switch문을 실행시켜서 효과마다 케이스를 두고 진행하는 방식이었다. 하지만 그건 너무 더러운 코드였다. 왜냐하면 비슷한 출력양식이 계속 중복되는 방식이었고 만약에 효과가 총 100개가 있다면 100개의 케이스를 만들어야하는 상황이었기 때문이다. 
+  * 2번코드까지에선 switch문을 실행시켜서 효과마다 케이스를 두고 진행하는 방식이었다. 하지만 그건 너무 더러운 코드였다. 왜냐하면 비슷한 출력양식이 계속 중복되는 방식이었고 만약에 효과가 총 100개가 있다면 100개의 케이스를 만들어야하는 상황이었기 때문이다. 
 
-    * 또한 메소드 이름에 맞지않는 기능을 하고있었다.  분명 메소드 이름은 체크를 하기 위해 checkEffect라는 이름을 붙였지만 2번코드에선 체크와 출력 두 기능을 동시에 하고있었다.
+  * 또한 메소드 이름에 맞지않는 기능을 하고있었다.  분명 메소드 이름은 체크를 하기 위해 checkEffect라는 이름을 붙였지만 2번코드에선 체크와 출력 두 기능을 동시에 하고있었다.
 
-    * 따라서 나는 checkEffect메소드에선 저 코드만을 실행시키기로 하였다.
+  * 따라서 나는 checkEffect메소드에선 저 코드만을 실행시키기로 하였다.
 
-      * 저 코드를 실행시키려면 일단 부모 클래스에 이 메소드를 선언시켜야 한다.
+    * 저 코드를 실행시키려면 일단 부모 클래스에 이 메소드를 선언시켜야 한다.
 
-        * Effect클래스
+      * Effect클래스
 
-          * ~~~java
-            public abstract void print(int j);
+        ~~~java
+        public abstract void print(int j);
+        ~~~
+
+        * 부모 클래스에 이 메소드를 선언하면 당연히 이것을 상속받은 클래스에서 사용이 가능하다.
+
+          * ex) EFBlink 클래스 - 깜박임 효과 클래스
+
+            ~~~java
+            public class EFBlink extends Effect {
+                @Override
+                public void print(int j) {
+                    this.setting();
+                    System.out.println("~~~~")
+                }
+                
+                @Override
+                public void setting() {
+                	//~~~
+                }
             ~~~
-
-            * 부모 클래스에 이 메소드를 선언하면 당연히 이것을 상속받은 클래스에서 사용이 가능하다.
-
-              * ex) EFBlink 클래스 - 깜박임 효과 클래스
-
-                * ~~~java
-                  public class EFBlink extends Effect {
-                      @Override
-                      public void print(int j) {
-                          this.setting();
-                          System.out.println("~~~~")
-                      }
-                      
-                      @Override
-                      public void setting() {
-                      	//~~~
-                      }
-                  ~~~
-                  * 이렇게 상속받아진 자식클래스에서 부모의 메소드를 가져다 쓸수있다. 이 코드에선 print() 메소드에서 setting() 메소드까지 실행시킨다. 이러면 checkEffect에서 일일이 따져가며 출력할 필요가 없어지게 된다.
+            * 이렇게 상속받아진 자식클래스에서 부모의 메소드를 가져다 쓸수있다. 이 코드에선 print() 메소드에서 setting() 메소드까지 실행시킨다. 이러면 checkEffect에서 일일이 따져가며 출력할 필요가 없어지게 된다.
 
 * checkEffect - 리팩토링을 거친 후
 
-  * 
-
-    ~~~java
-    checkEffect(~~~) {
-        
-        /*
-        	switch() {
-        		case:
-        		System.out.println();
-        		brek;
-        		case:
-        		System.out.println();
-        		brek;
-        		case:
-        		System.out.println();
-        		brek;
-        	}
-        
-        */
-        
-        effect.print():
-    }
-    ~~~
-
-    * switch로 로직을 짰을때보다 훨씬 코드가 줄어들었다. 또한 성능도 올라갔을 것이다. 
-    * 코드가 보기에 매우 편해진다. 다른 개발자를 위해 print메소드에 주석까지 달아놓으면 더욱 좋을 것.
+  ~~~java
+checkEffect(~~~) {
+      
+      /*
+      	switch() {
+      		case:
+      		System.out.println();
+      		brek;
+      		case:
+      		System.out.println();
+      		brek;
+      		case:
+      		System.out.println();
+      		brek;
+      	}
+      
+      */
+      
+      effect.print():
+  }
+  ~~~
+  
+  * switch로 로직을 짰을때보다 훨씬 코드가 줄어들었다. 또한 성능도 올라갔을 것이다. 
+* 코드가 보기에 매우 편해진다. 다른 개발자를 위해 print메소드에 주석까지 달아놓으면 더욱 좋을 것.
