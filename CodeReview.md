@@ -52,7 +52,7 @@
                 for(/*첫번째 before의 시작시간 부터 마지막 before의 종료시간까지*/) {
          			printBefore(befores, i , j);	// vo print           
                 }
-                }
+            }
         }
     }
     ~~~
@@ -69,6 +69,7 @@
         	Effect effect2 = new Effect();
         	Effect effect3 = new Effect();
         
+        
     		before1.setsTime(30);
     		before1.seteTime(40);
     		before1.seteName("blink");
@@ -84,14 +85,14 @@
            	befoer3~~~...
         	
     }
-    ~~~
-
-    * 파라미터로 들어온 beforeVo 3개를 세팅하는 메소드이다. 현재는 추상화를 사용하기 전 코드라 before자체의 필드와 그 안에 들어있는 effect와 secenChange 도 동일하게 모두 일일이 set()메소드를 통해 값을 넣어주어야 한다. 벌써 매우 비효율적이란걸 알 수 있다.
-
+~~~
+    
+  * 파라미터로 들어온 beforeVo 3개를 세팅하는 메소드이다. 현재는 추상화를 사용하기 전 코드라 before자체의 필드와 그 안에 들어있는 effect와 secenChange 도 동일하게 모두 일일이 set()메소드를 통해 값을 넣어주어야 한다. 벌써 매우 비효율적이란걸 알 수 있다.
   
 
-  * printBefore()
-
+  
+* printBefore()
+  
     ~~~java
     private static void printBefore(List<BeforeMovieCutVo> befores, int i, int j) {
     //		System.out.println(j);
@@ -109,14 +110,14 @@
     			System.out.println(j+"초 " + "before" + (i+1) + " (" + befores.get(i).getLocation().x + " " + befores.get(i).getLocation().y + ") 효과 없음");
     		}
     	}
-    ~~~
-
-    * 여기서 i는 몇번째 before인지 뜻하고 j는 i번째 before의 초단위 이다. j번째에서 이펙트인가 장면전환효과인가로 나누어서 진행한다.
-
-    
-
-  * checkEffect() (장면전환 효과 체크인 checkSC()도 동일한 형태이다...)
-
+  ~~~
+  
+  * 여기서 i는 몇번째 before인지 뜻하고 j는 i번째 before의 초단위 이다. j번째에서 이펙트인가 장면전환효과인가로 나누어서 진행한다.
+  
+  
+  
+* checkEffect() (장면전환 효과 체크인 checkSC()도 동일한 형태이다...)
+  
     ~~~java
     private static void checkEffect(BeforeMovieCutVo before, int j, int i, Effect effect) {
     		String ename = before.geteName().toLowerCase();
@@ -143,8 +144,8 @@
     			break;
     		}
     	}
-    ~~~
-
+  ~~~
+  
     * ename은 여기서 효과명을 말한다. 모든 효과 출력양식이 비슷하지만 ename에 따라서 출력양식이 달라지며 effect에 선언된 효과별 세팅들이 호출된다. 즉, effect클래스는 필드변수도 많지만 효과가 많을 수록 그의 따른 세팅메소드도 많아진다..
 
 
@@ -165,7 +166,8 @@
   	protected int sTime;
   	protected int eTime;
   	protected int length;
-  	protected int now = 0;
+  	
+     	protected int now = 0;
       
       gettter&&setter
           
@@ -198,7 +200,7 @@
 * checkEffect() - effect 추상화 후
 
   ~~~java
-  case "blink":
+  		case "blink":
   			effect.setWeight();
   			System.out.println(j + "초 " + "before"+ (i+1) + " (" + before.getLocation().x + " " + before.getLocation().y + ") effect : " + before.geteName() + " " + abEffect.getLocation() + " 현재 : " + abEffect.now + "번 깜박임");
   			break;
@@ -264,13 +266,10 @@
                       
                       @Override
                       public void setting() {
-                  ~~~
+                      	//~~~
                       }
-                  }
                   ~~~
-
                   * 이렇게 상속받아진 자식클래스에서 부모의 메소드를 가져다 쓸수있다. 이 코드에선 print() 메소드에서 setting() 메소드까지 실행시킨다. 이러면 checkEffect에서 일일이 따져가며 출력할 필요가 없어지게 된다.
-                  ~~~
 
 * checkEffect - 리팩토링을 거친 후
 
