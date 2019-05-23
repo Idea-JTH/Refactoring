@@ -85,18 +85,14 @@
            	//befoer3~~~...
         	
     }
-~~~
+    ~~~
     
-  * 파라미터로 들어온 beforeVo 3개를 세팅하는 메소드이다. 현재는 추상화를 사용하기 전 코드라 before자체의 필드와 그 안에 들어있는 effect와 secenChange 도 동일하게 모두 일일이 set()메소드를 통해 값을 넣어주어야 한다. 벌써 매우 비효율적이란걸 알 수 있다.
-    
+      * 파라미터로 들어온 beforeVo 3개를 세팅하는 메소드이다. 현재는 추상화를 사용하기 전 코드라 before자체의 필드와 그 안에 들어있는 effect와 secenChange 도 동일하게 모두 일일이 set()메소드를 통해 값을 넣어주어야 한다. 벌써 매우 비효율적이란걸 알 수 있다.
     
   
-
-  
-  * printBefore()
-  
-    ~~~java
-    private static void printBefore(List<BeforeMovieCutVo> befores, int i, int j) {
+* printBefore()
+~~~java
+private static void printBefore(List<BeforeMovieCutVo> befores, int i, int j) {
     //		System.out.println(j);
     //		System.out.println("--" + befores.get(i).getAbEffect().getsTime());
     		if(befores.get(i).getAbEffect() != null && befores.get(i).getAbEffect().getsTime() <= j && j <= befores.get(i).getAbEffect().geteTime()) {
@@ -111,13 +107,13 @@
     		} else {
     			System.out.println(j+"초 " + "before" + (i+1) + " (" + befores.get(i).getLocation().x + " " + befores.get(i).getLocation().y + ") 효과 없음");
   		}
-    	}
-  ~~~
-  
+    }
+~~~
+
   * 여기서 i는 몇번째 before인지 뜻하고 j는 i번째 before의 초단위 이다. j번째에서 이펙트인가 장면전환효과인가로 나누어서 진행한다.
+
   
-  
-  
+
   * checkEffect() (장면전환 효과 체크인 checkSC()도 동일한 형태이다...)
   
     ~~~java
@@ -144,7 +140,7 @@
     			effect.wiggleSetting();
     			System.out.println(j + "초 " + "before"+ (i+1) + " (" + before.getLocation().x + " " + before.getLocation().y + ") effect : " + before.geteName() + " " + effect.getLocation() + " 현재 : " + effect.now + "%");
     			break;
-  		}
+    		}
     	}
     ~~~
   
