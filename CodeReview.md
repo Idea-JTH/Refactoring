@@ -1,4 +1,4 @@
-3가지 코드 분석&비교
+# 3가지 코드 분석&비교
 
 1. 추상화를 사용하지 않았을 때 짰을 코드
 2. 추상화를 사용했을 때의 코드
@@ -114,37 +114,37 @@ private static void printBefore(List<BeforeMovieCutVo> befores, int i, int j) {
 
   
 
-  * checkEffect() (장면전환 효과 체크인 checkSC()도 동일한 형태이다...)
-  
-    ~~~java
-    private static void checkEffect(BeforeMovieCutVo before, int j, int i, Effect effect) {
-    		String ename = before.geteName().toLowerCase();
-    		switch(ename) {			
-    		case "blink":
-    			effect.blinkSetting();
-    			System.out.println(j + "초 " + "before"+ (i+1) + " (" + before.getLocation().x + " " + before.getLocation().y + ") effect : " + before.geteName() + " " + effect.getLocation() + " 현재 : " + effect.now + "번 깜박임");
-    			break;
-    			
-    		case "vibrate":
-                effect.vibrateSetting();
-    			System.out.println(j + "초 " + "before"+ (i+1) + " (" + before.getLocation().x + " " + before.getLocation().y + ")");
-    			
-    			System.out.println("effect : " + before.geteName() + " " + effect.getLocation());
-    			break;
-    			
-    		case "zoominout":
-    			effect.zoominoutSetting();
-    			System.out.println(j + "초 " + "before"+ (i+1) + " (" + before.getLocation().x + " " + before.getLocation().y + ") effect : " + before.geteName() + " " + effect.getLocation() + " 현재 : " + effect.now + "% 축소 또는 확대");
-    			break;
-    		case "Wiggle":
-    			effect.wiggleSetting();
-    			System.out.println(j + "초 " + "before"+ (i+1) + " (" + before.getLocation().x + " " + before.getLocation().y + ") effect : " + before.geteName() + " " + effect.getLocation() + " 현재 : " + effect.now + "%");
-    			break;
-    		}
-    	}
-    ~~~
-  
-    * ename은 여기서 효과명을 말한다. 모든 효과 출력양식이 비슷하지만 ename에 따라서 출력양식이 달라지며 effect에 선언된 효과별 세팅들이 호출된다. 즉, effect클래스는 필드변수도 많지만 효과가 많을 수록 그의 따른 세팅메소드도 많아진다..
+* checkEffect() (장면전환 효과 체크인 checkSC()도 동일한 형태이다...)
+
+~~~java
+private static void checkEffect(BeforeMovieCutVo before, int j, int i, Effect effect) {
+		String ename = before.geteName().toLowerCase();
+		switch(ename) {			
+		case "blink":
+			effect.blinkSetting();
+			System.out.println(j + "초 " + "before"+ (i+1) + " (" + before.getLocation().x + " " + before.getLocation().y + ") effect : " + before.geteName() + " " + effect.getLocation() + " 현재 : " + effect.now + "번 깜박임");
+			break;
+			
+		case "vibrate":
+            effect.vibrateSetting();
+			System.out.println(j + "초 " + "before"+ (i+1) + " (" + before.getLocation().x + " " + before.getLocation().y + ")");
+			
+			System.out.println("effect : " + before.geteName() + " " + effect.getLocation());
+			break;
+			
+		case "zoominout":
+			effect.zoominoutSetting();
+			System.out.println(j + "초 " + "before"+ (i+1) + " (" + before.getLocation().x + " " + before.getLocation().y + ") effect : " + before.geteName() + " " + effect.getLocation() + " 현재 : " + effect.now + "% 축소 또는 확대");
+			break;
+		case "Wiggle":
+			effect.wiggleSetting();
+			System.out.println(j + "초 " + "before"+ (i+1) + " (" + before.getLocation().x + " " + before.getLocation().y + ") effect : " + before.geteName() + " " + effect.getLocation() + " 현재 : " + effect.now + "%");
+			break;
+		}
+	}
+~~~
+
+* ename은 여기서 효과명을 말한다. 모든 효과 출력양식이 비슷하지만 ename에 따라서 출력양식이 달라지며 effect에 선언된 효과별 세팅들이 호출된다. 즉, effect클래스는 필드변수도 많지만 효과가 많을 수록 그의 따른 세팅메소드도 많아진다..
 
 
 
@@ -297,3 +297,16 @@ checkEffect(~~~) {
   
   * switch로 로직을 짰을때보다 훨씬 코드가 줄어들었다. 또한 성능도 올라갔을 것이다. 
 * 코드가 보기에 매우 편해진다. 다른 개발자를 위해 print메소드에 주석까지 달아놓으면 더욱 좋을 것.
+
+
+
+---
+
+### 번외 - 부록
+
+* 추상화에 관한 글들
+  * [1.](https://itewbm.tistory.com/entry/%EC%B6%94%EC%83%81%ED%81%B4%EB%9E%98%EC%8A%A4abstract-class%EC%9D%98-%EC%A1%B4%EC%9E%AC-%EC%9D%B4%EC%9C%A0](https://itewbm.tistory.com/entry/추상클래스abstract-class의-존재-이유))
+  * [2.](https://opentutorials.org/module/2495/14140)
+* 리팩토링에 관한 글들
+  * [codereview](https://codereview.tistory.com/3)
+  * [리팩토링 해야되는 상황들](https://feel5ny.github.io/2017/12/09/Refactoring/)
