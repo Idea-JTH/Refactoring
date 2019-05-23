@@ -274,7 +274,7 @@ private static void checkEffect(BeforeMovieCutVo before, int j, int i, Effect ef
 * checkEffect - 리팩토링을 거친 후
 
   ~~~java
-checkEffect(~~~) {
+checkEffect(...) {
       
       /*
       	switch() {
