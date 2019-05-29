@@ -323,6 +323,16 @@ print메소드가 이렇게 간단해진다는 뜻이다. 이전 코드와 달�
 
 
 
+---
+
+## 참고
+
+추상화 참고 사이트 : [https://itewbm.tistory.com/entry/%EC%B6%94%EC%83%81%ED%81%B4%EB%9E%98%EC%8A%A4abstract-class%EC%9D%98-%EC%A1%B4%EC%9E%AC-%EC%9D%B4%EC%9C%A0](https://itewbm.tistory.com/entry/추상클래스abstract-class의-존재-이유)
+
+
+
+
+
 
 
 
