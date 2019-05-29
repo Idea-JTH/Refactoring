@@ -52,6 +52,8 @@
   * 너무 높은 의존도를 가진 클래스
   * 가독성이 떨어지는 코드
 
+![error](http://feel5ny.github.io/images/post_img/46/thumb_default.jpg)
+
 
 
 지금 부터는 실제 프로젝트에 적용시킨 사례를 예제로 만들어 설명하겠다.
